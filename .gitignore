@@ -1,3 +1,14 @@
+###############################
+# Custom Ignores for data
+
+facebook-zips/*.zip
+extracted-data/*.csv
+output-graphs/*
+
+# Allow example data to be pushed
+!*.example.*
+
+###############################
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
