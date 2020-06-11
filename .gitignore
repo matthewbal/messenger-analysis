@@ -2,11 +2,12 @@
 # Custom Ignores for data
 
 facebook-zips/*.zip
-extracted-data/*.csv
-output-graphs/*
+processed-data/*
+raw-data/*
+output-data/*
 
 # Allow example data to be pushed
-!*.example.*
+!facebook-zips/facebook-example.zip
 
 ###############################
 # Byte-compiled / optimized / DLL files
