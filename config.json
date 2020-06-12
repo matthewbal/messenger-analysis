@@ -1,0 +1,23 @@
+{
+    "debug": true,
+    "zipFile": "facebook-example",
+    "myName": "MyFirst MyLast",
+    "messagesOverTime": {
+        "fps": 2,
+        "videoLenSecs": 60,
+        "maxFriendsShown": 5,
+        "width": 19,
+        "height": 10,
+        "friendGroups": {
+            "Friend": {
+                "default": true,
+                "color": "#90d595",
+                "matchList": []
+            },
+            "Top Friends": {
+                "color": "#e48381",
+                "matchList": ["Katherine Yarbrough", "Benjamin Bolden"]
+            }
+        }
+    }
+}

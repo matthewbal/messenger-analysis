@@ -18,8 +18,12 @@ https://www.zapptales.com/en/download-facebook-messenger-chat-history-how-to/
 8. Output will be in the output-data folder
 
 ## Current Features:
+- Creates an animated graph of number of messages sent to top friends over time
+- Configurable framerate, color friends in groups, length of video, dimensions & max number of friends to show
 - Visualise which friends send you longer messages than you send them
+
 
 ## Coming soon:
 - More graphs
 - Detailed guide on how to run this repo
+- Guide to each visualisation with example images / videos
