@@ -6,6 +6,8 @@ processed-data/*
 raw-data/*
 output-data/*
 
+config.json
+
 # Allow example data to be pushed
 !facebook-zips/facebook-example.zip
 

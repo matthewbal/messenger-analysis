@@ -9,11 +9,13 @@ Runs the analysis on a set of Facebook Messenger data using a specified config
 """
 
 import json
+import shutil
+import os
 
 from scripts.unzipper import ZipFuncs
 from scripts.processor import ProcessorFuncs
 
-from scripts.sendreceive import SendReceiveData
+from scripts.topcontactdetails import TopContactDetails
 from scripts.messagesovertime import MessagesOverTime
 
 
@@ -22,6 +24,12 @@ if __name__ == "__main__":
     print("====================================")
     print("⛏ Starting the Messenger Analysis")
     print("====================================")
+
+    # Do example config thing...
+
+    if not os.path.exists('config.json'):
+        print("Loading Example Config into Config")
+        shutil.copy('exampleconfig.json', 'config.json')
 
     with open('config.json', 'r') as f:
         config = json.load(f)
@@ -45,9 +53,7 @@ if __name__ == "__main__":
     print("# Generating Graphs")
     print("##############################")
 
-    SendReceiveData().output_send_receive(config)
-
-    config['debug'] = True
+    TopContactDetails().generate_all_graphs(config)
 
     messagesOverTimeConfig = config['messagesOverTime']
 

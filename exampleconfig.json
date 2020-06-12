@@ -2,10 +2,15 @@
     "debug": true,
     "zipFile": "facebook-example",
     "myName": "MyFirst MyLast",
+    "topContactDetails": {
+        "maxFriendsShown": 20,
+        "width": 10,
+        "height": 19
+    },
     "messagesOverTime": {
-        "fps": 2,
-        "videoLenSecs": 60,
-        "maxFriendsShown": 5,
+        "fps": 1,
+        "videoLenSecs": 120,
+        "maxFriendsShown": 20,
         "width": 19,
         "height": 10,
         "friendGroups": {

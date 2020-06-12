@@ -88,6 +88,7 @@ class ProcessorFuncs():
         # Now for each file, load file
         # Get file contact name
         # put all messages in messageList
+        # Determine if message was a conversation starter
         for messageFile in tqdm(messageFiles):
             with open(messageFile['path'], "r", encoding="utf-8") as f:
                 messages = json.load(f)
@@ -123,8 +124,11 @@ class ProcessorFuncs():
                 contentList = []
                 typeList = []
                 pathList = []
-                oneList = []
                 nameList = []
+                convoStartList = []
+
+                prevTime = 0
+                minConvoTime = (86400000) // 2  # 12 hours
 
                 # Create messages
                 for message in messages['messages']:
@@ -133,7 +137,6 @@ class ProcessorFuncs():
                     if 'content' not in message:
                         continue
                     timestampsList.append(message['timestamp_ms'])
-                    oneList.append(1)
                     # Use ftfy to fix terrible facebook unicode
                     contentList.append(ftfy.fix_text(message['content']))
                     typeList.append(message['type'])
@@ -144,6 +147,21 @@ class ProcessorFuncs():
                     else:
                         receivedList.append(1)
 
+                    # Calculate if was conversation starter..
+                    # If the message was sent more than 8 hours after previous one
+                    # It is a convo starter
+                    # NOTE: The jsons are ordered ascending as we go down them
+                    # So, we must say if current is LESS than prev within
+                    # tolerance
+                    # print(message['timestamp_ms'], (prevTime + minConvoTime),
+                    # str(message['timestamp_ms'] < (prevTime - minConvoTime)))
+                    if message['timestamp_ms'] < (prevTime - minConvoTime) or prevTime == 0:
+                        convoStartList.append(1)
+                    else:
+                        convoStartList.append(0)
+
+                    prevTime = message['timestamp_ms']
+
                 newMessages = {
                     "contactID": pathList,
                     "name": nameList,
@@ -151,7 +169,7 @@ class ProcessorFuncs():
                     "timestamp_ms": timestampsList,
                     "content": contentList,
                     "type": typeList,
-                    "msg": oneList,
+                    'startedConv': convoStartList
                 }
 
                 newMessageDF = pd.DataFrame.from_dict(newMessages)

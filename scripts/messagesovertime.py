@@ -47,7 +47,9 @@ class MessagesOverTime():
         print("Generating a messages over time graph")
 
         AllMsgs = pd.read_csv(allMsgLoc, usecols=[
-                              'name', 'timestamp_ms', 'msg'])
+                              'name', 'timestamp_ms'])
+
+        AllMsgs['msg'] = 1
 
         minTime = AllMsgs['timestamp_ms'].min()
         maxTime = AllMsgs['timestamp_ms'].max()
@@ -196,23 +198,13 @@ class MessagesOverTime():
                     va='center'
                 )
 
-                # Draw the value
+                # Draw the value and group
                 ax.text(
                     value + dx,
                     i - .25,
-                    f'{value:,.0f}',
+                    group_lk[name] + ", " + f'{value:,.0f}' + " Messages",
                     size=8,
                     ha='left',
-                    va='baseline'
-                )
-                # Draw the group
-                ax.text(
-                    value - dx,
-                    i - .25,
-                    group_lk[name],
-                    size=8,
-                    color='#444444',
-                    ha='right',
                     va='baseline'
                 )
 
